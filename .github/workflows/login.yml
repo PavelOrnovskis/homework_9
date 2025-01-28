@@ -2,11 +2,10 @@ name: Check formatting, linting, and run tests
 
 on:
   push:
-    branches: [master, develop]
+    branches: [master]
   pull_request:
     branches:
       - master
-      - develop  # Добавлено для пулл реквестов в develop
 
 jobs:
   format-lint-test:
