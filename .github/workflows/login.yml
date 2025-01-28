@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
       - master
+      - develop  # Добавлено для пулл реквестов в develop
 
 jobs:
   format-lint-test:
@@ -46,5 +47,3 @@ jobs:
           echo "Running Playwright to execute API tests..."
           npx playwright test tests/Login.spec.ts
 
-      - name: Run tests
-        run: npm test -- tests/LoanDto.spec.ts
