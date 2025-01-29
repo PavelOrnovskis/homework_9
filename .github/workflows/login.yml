@@ -1,4 +1,4 @@
-name: Login
+name: testing login methods
 
 on:
   push:
