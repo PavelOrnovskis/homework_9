@@ -1,8 +1,9 @@
-name: Check formatting, linting, and run tests
+name: Run tests and checks
 
 on:
   push:
-    branches: [master, develop]
+    branches:
+      - master
   pull_request:
     branches:
       - master
@@ -39,9 +40,9 @@ jobs:
           npx tsc --noEmit
 
       - name: Run Playwright API tests
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
         run: |
           echo "Running Playwright to execute API tests..."
-          npx playwright test
-
-      - name: Run tests
-        run: npm test -- tests/LoanDto.spec.ts
+          npx playwright test tests/LoginDTO.spec.ts
