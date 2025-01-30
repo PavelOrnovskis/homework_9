@@ -20,4 +20,18 @@ test.describe('Login tests', async () => {
     console.log(await response.text())
     expect(response.status()).toBe(StatusCodes.METHOD_NOT_ALLOWED)
   })
+  test('Negative testing, wrong method to get 405 error (DELETE method)', async ({ request }) => {
+    const response = await request.delete(`https://backend.tallinn-learning.ee/login/student`, {
+      data: LoginDTO.createLoginWithCorrectData(),
+    })
+    console.log(await response.text())
+    expect(response.status()).toBe(StatusCodes.METHOD_NOT_ALLOWED)
+  })
+  test('Negative testing, wrong method to get 405 error (PUT method)', async ({ request }) => {
+    const response = await request.put(`https://backend.tallinn-learning.ee/login/student`, {
+      data: LoginDTO.createLoginWithCorrectData(),
+    })
+    console.log(await response.text())
+    expect(response.status()).toBe(StatusCodes.METHOD_NOT_ALLOWED)
+  })
 })
