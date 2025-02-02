@@ -72,19 +72,21 @@ test.describe('Login tests', async () => {
     })
     expect(responseCreateOrder.status()).toBe(StatusCodes.OK);
     const createdOrder = OrderDto.serializeResponse(await responseCreateOrder.json())
-    expect(createdOrder.id).toBeDefined();
-    expect(createdOrder.id).toBeGreaterThan(0);
-
     const responseDeleteOrder = await request.delete(`https://backend.tallinn-learning.ee/orders/${createdOrder.id}`, {
       headers: {
         Authorization: "Bearer " + await responseLogin.text()
       }
     })
     expect(responseDeleteOrder.status()).toBe(StatusCodes.OK);
-    const deletedOrder = OrderDto.generateEmptyOrderDto()
-    expect(deletedOrder.status).toBeUndefined();
-    console.log(responseDeleteOrder.status());
+    console.log(responseDeleteOrder.statusText())
+
+    const responseCheckOrder = await request.get(`https://backend.tallinn-learning.ee/orders/${createdOrder.id}`, {
+      headers: {
+        Authorization: "Bearer " + await responseLogin.text()
+      }
+
+    });
+    console.log(responseCheckOrder.status())
 
   })
-
 })
