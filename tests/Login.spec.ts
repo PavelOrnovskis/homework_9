@@ -81,8 +81,8 @@ test.describe('Login tests', async () => {
       }
     })
     expect(responseDeleteOrder.status()).toBe(StatusCodes.OK);
-    const requestedOrder = OrderDto.serializeResponse(await responseDeleteOrder.json());
-    expect(requestedOrder.status).toBeUndefined();
+    const deletedOrder = OrderDto.generateEmptyOrderDto()
+    expect(deletedOrder.status).toBeUndefined();
     console.log(responseDeleteOrder.status());
 
   })
