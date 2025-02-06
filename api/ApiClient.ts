@@ -58,9 +58,9 @@ export class ApiClient {
     return responseBody.id;
   }
 
-  async deleteOrderById(orderId: number): Promise<void> {
+  async deleteOrderById(orderId : number): Promise<void> {
     console.log('Deleting order...');
-    const response = await this.request.delete(`${serverURL}${orderPath}`, {
+    const response = await this.request.delete(`https://backend.tallinn-learning.ee/orders/${orderId}`, {
       data: OrderDto.generateRandomOrderDto(),
       headers: {
         Authorization: `Bearer ${this.jwt}`,
