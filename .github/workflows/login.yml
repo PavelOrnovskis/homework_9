@@ -2,7 +2,7 @@ name: testing login methods
 
 on:
   push:
-    branches: [master, develop, feat/po/tl-11-homework]
+    branches: [master, develop, feat/po/tl-12-homework]
   pull_request:
     branches: [master]
 
