@@ -28,6 +28,9 @@ jobs:
           compose-file: ./docker-compose.yaml
           up-flags: -d
 
+      - name: Wait for server to start # Добавляем задержку
+        run: sleep 10
+
       - name: Run tests for an empty array
         run: npx playwright test tests/empty-user.api.spec.ts
 
