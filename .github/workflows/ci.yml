@@ -28,7 +28,7 @@ jobs:
           compose-file: ./docker-compose.yaml
           up-flags: -d
 
-      - name: Wait for server to start # Добавляем задержку
+      - name: Wait for server to start
         run: sleep 10
 
       - name: Run tests for an empty array
