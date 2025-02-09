@@ -28,24 +28,11 @@ jobs:
           compose-file: ./docker-compose.yaml
           up-flags: -d
 
-      - name: Wait for server to start
-        run: |
-          echo "Waiting for server..."
-          timeout 30 sh -c 'until curl -s http://127.0.0.1:3000/health; do sleep 1; done' || exit 1
-
       - name: Check running containers
         run: docker ps -a
-
-      - name: Show logs if server fails to start
-        if: failure()
-        run: docker compose logs
 
       - name: Run tests for an empty array
         run: npx playwright test tests/empty-user.api.spec.ts
 
       - name: Run the remaining tests
         run: npx playwright test tests/user.api.spec.ts
-
-      - name: Stop Docker containers
-        if: always()
-        run: docker compose down
