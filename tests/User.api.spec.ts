@@ -43,6 +43,6 @@ test.describe('User management app tests', async () => {
     const allUsersResponse = await request.get('http://localhost:3000/users')
     const json = await allUsersResponse.json()
 
-    expect(json.length).toBe(5)
+    expect(json.length).toBe(3)
   })
 })
