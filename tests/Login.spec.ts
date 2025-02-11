@@ -4,9 +4,6 @@ import { StatusCodes } from 'http-status-codes'
 import { OrderDto } from './DTO/OrderDto'
 import { ApiClient } from '../api/ApiClient'
 
-const serverURL = 'https://backend.tallinn-learning.ee/'
-const loginPath = 'login/student'
-const orderPath = 'orders'
 
 test.describe('Login tests', async () => {
   test('TL-12-1 Successful authorization', async ({ request }) => {
