@@ -1,4 +1,4 @@
-name: Build and Test
+name: Api local tests
 
 on:
   push:
@@ -7,20 +7,35 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  format-lint-test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Run Prettier check
+        run: |
+          echo "Running Prettier to check for formatting issues..."
+          npm run prettier:check
+
+      - name: Run ESLint check
+        run: |
+          echo "Running ESLint to check for linting issues..."
+          npm run lint
+
+      - name: Run TypeScript compile check
+        run: |
+          echo "Running TypeScript compiler to check for type issues..."
+          npx tsc --noEmit
 
       - name: Set up Docker Compose
         uses: hoverkraft-tech/compose-action@v2.0.1
@@ -28,8 +43,12 @@ jobs:
           compose-file: ./docker-compose.yaml
           up-flags: -d
 
-      - name: Run tests for an empty array
-        run: npx playwright test tests/empty-user.api.spec.ts
+      - name: Run Playwright Api empty user test
+        run: |
+          echo "Running Playwright to execute empty user tests..."
+          npx playwright test tests/empty-user.api.spec.ts --workers=1
 
-      - name: Run the remaining tests
-        run: npx playwright test tests/user.api.spec.ts
+      - name: Run Playwright API tests
+        run: |
+          echo "Running Playwright to execute local API tests..."
+          npx playwright test tests/User.Api.spec.ts --workers=1
