@@ -53,11 +53,11 @@ test.describe('User management API with loop', () => {
     for (let i = 0; i < userArray.length; i++) {
       const users = userArray[i]
 
-      expect(users.status()).toBe(StatusCodes.OK)
+      expect(users.status()).toBe(StatusCodes.CREATED)
       expect(users.json()).toBeDefined()
     }
     const response = await request.get(`${baseURL}`)
-    expect(response.status()).toBe(StatusCodes.OK)
+    expect(response.status()).toBe(StatusCodes.CREATED)
     const totalUsers = (await response.json()).length
     expect(totalUsers).toBe(userArray.length)
   })
